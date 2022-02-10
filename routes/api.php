@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/login', 'AuthController@getToken');
 
-Route::middleware(['auth:sanctum', 'admin'])->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(["middleware" => ['auth:sanctum', 'admin']], function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+    //Route::resource("traning_infos", API\TraningInfoController::class);
 });
