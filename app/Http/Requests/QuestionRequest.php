@@ -26,10 +26,20 @@ class QuestionRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'title' => 'required|regex:/^[a-zA-Z0-9\s]+$/',
-            'question_type_id' => 'required|exists:question_types,id'
-        ];
+        if (in_array($this->method(), ['PUT', 'PATCH'])) {
+            return [
+                'title' => 'regex:/^[a-zA-Z0-9\s\.,!?]*$/',
+                "options"    => "array|min:4",
+                "options.*"  => "string|distinct|min:4",
+            ];
+        } else {
+            return [
+                'title' => 'required|regex:/^[a-zA-Z0-9\s\.,!?]*$/',
+                'question_type_id' => 'required|exists:question_types,id',
+                "options"    => "required|array|min:4",
+                "options.*"  => "required|string|distinct|min:4",
+            ];
+        }
     }
 
     public function messages()
@@ -38,18 +48,10 @@ class QuestionRequest extends FormRequest
             'title.required' => 'Please add your question!',
             'title.regex' => 'Please insert a valid  title!',
             'question_type_id.required' => 'Please mention question type!',
-            'question_type_id.exists' => 'This is not a valid question type!'
+            'question_type_id.exists' => 'This is not a valid question type!',
+            'options.required' => 'Please add four options!',
+            'options.min' => 'Please add four options!',
+            'options.array' => 'Options must be an array!'
         ];
-    }
-
-    protected function failedValidation(Validator $validator)
-    {
-        $response = new Response([
-            'message' => 'Validation error',
-            'type' => 'error',
-            'code' => 422,
-            'error' => $validator->errors()
-        ], 422);
-        throw new ValidationException($validator, $response);
     }
 }

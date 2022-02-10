@@ -24,7 +24,12 @@ Route::group(["middleware" => ['auth:sanctum', 'admin']], function () {
     });
 
     //Route::post('/question-types', 'QuestionTypeController@store');
-    Route::resource("question-types", 'QuestionTypeController');
+    //Route::resource("question-types", 'QuestionTypeController');
+
+    Route::resources([
+        "question-types" => 'QuestionTypeController',
+        "questions" => 'QuestionController',
+    ]);
 
     //Route::resource("traning_infos", API\TraningInfoController::class);
 });
