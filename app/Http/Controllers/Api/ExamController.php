@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ExamRequest;
 use App\Repositories\ExamRepository;
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Resources\ExamResource;
 
 class ExamController extends ApiController
 {
@@ -24,19 +26,60 @@ class ExamController extends ApiController
         $this->examRepository = $examRepository;
     }
 
-    public function create()
+    public function index(Request $request)
     {
+        try {
+            $result = $this->examRepository->filteredData($request);
+            if (count($result) > 0)
+                return $this->respond('Fetched all exams.', 'success', 200, ExamResource::collection($result));
+
+            return $this->errorResponse('No data found.', 400);
+        } catch (\Exception $e) {
+            app('log')->error('Content: ' . $e->getMessage(), $e->getTrace());
+            return $this->errorResponse();
+        }
     }
 
-    public function store()
+    public function store(ExamRequest $examRequest)
     {
+        try {
+            $result = $this->examRepository
+                ->createWithPivot($examRequest);
+            if ($result)
+                return $this->respond('New exam added successfully!', 'success', 201, new ExamResource($result));
+
+            return $this->errorResponse('Not Created successfully', 400);
+        } catch (\Exception $e) {
+            app('log')->error('Pocket: ' . $e->getMessage(), $e->getTrace());
+            return $this->errorResponse();
+        }
     }
 
-    public function update()
+    public function update(ExamRequest $examRequest, $examId)
     {
+        try {
+            $result = $this->examRepository->updateWithPivot($examRequest, $examId);
+            if ($result)
+                return $this->respond('Exam updated successfully!', 'success', 200);
+
+            return $this->errorResponse('Not updated successfully', 400);
+        } catch (\Exception $e) {
+            app('log')->error('Content: ' . $e->getMessage(), $e->getTrace());
+            return $this->errorResponse();
+        }
     }
 
-    public function destroy()
+    public function destroy($typeId)
     {
+        try {
+            $result = $this->examRepository->deleteWithPivot($typeId);
+            if ($result)
+                return $this->respond('Exam deleted successfully', 'removed');
+
+            return $this->errorResponse(400, $result);
+        } catch (\Exception $e) {
+            app('log')->error('Content: ' . $e->getMessage(), $e->getTrace());
+            return $this->errorResponse();
+        }
     }
 }

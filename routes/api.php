@@ -29,6 +29,7 @@ Route::group(["middleware" => ['auth:sanctum', 'admin']], function () {
     Route::resources([
         "question-types" => 'QuestionTypeController',
         "questions" => 'QuestionController',
+        "exams" => 'ExamController',
     ]);
 
     //Route::resource("traning_infos", API\TraningInfoController::class);
