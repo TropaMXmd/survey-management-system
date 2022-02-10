@@ -1,18 +1,19 @@
 <?php
 
 namespace App\Repositories;
- 
+
 use App\Repositories\Contracts\RepositoryInterface;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Container\Container as App;
- 
-abstract class Repository implements RepositoryInterface {
+
+abstract class Repository implements RepositoryInterface
+{
     /**
      * @var App
      */
     private $app;
- 
+
     /**
      * @var
      */
@@ -22,11 +23,12 @@ abstract class Repository implements RepositoryInterface {
      * @param App $app
      * @throws Exception
      */
-    public function __construct(App $app) {
+    public function __construct(App $app)
+    {
         $this->app = $app;
         $this->makeModel();
     }
- 
+
     /**
      * Specify Model class name
      *
@@ -40,10 +42,11 @@ abstract class Repository implements RepositoryInterface {
      * @param array $columns
      * @return mixed
      */
-    public function all($columns = array('*')) {
-        return $this->model->get($columns);
+    public function all($columns = array('*'))
+    {
+        return $this->model->select($columns)->get();
     }
- 
+
     /**
      * Fetch all records using pagination
      * 
@@ -51,8 +54,9 @@ abstract class Repository implements RepositoryInterface {
      * @param array $columns
      * @return mixed
      */
-    public function paginate($perPage = 15, $columns = array('*')) {
-        return $this->model->paginate($perPage, $columns);
+    public function paginate($perPage = 15, $columns = array('*'))
+    {
+        return $this->model->select($columns)->paginate($perPage);
     }
 
     /**
@@ -61,7 +65,8 @@ abstract class Repository implements RepositoryInterface {
      * @param array $data
      * @return mixed
      */
-    public function create(array $data) {
+    public function create(array $data)
+    {
         return $this->model->create($data);
     }
 
@@ -75,7 +80,7 @@ abstract class Repository implements RepositoryInterface {
     {
         return $this->model->firstOrCreate($data);
     }
-  
+
     /**
      * Update record
      * 
@@ -85,7 +90,8 @@ abstract class Repository implements RepositoryInterface {
      * @param string $attribute
      * @return mixed
      */
-    public function update(array $data, $id, $attribute="id") {
+    public function update(array $data, $id, $attribute = "id")
+    {
         return $this->model->where($attribute, '=', $id)->update($data);
     }
 
@@ -95,10 +101,11 @@ abstract class Repository implements RepositoryInterface {
      * @param int $id
      * @return mixed
      */
-    public function delete($id) {
-        return $this->model->destroy($id);
+    public function delete($id)
+    {
+        return $this->model->where('id', $id)->delete();
     }
- 
+
     /**
      * Find a record by id
      * 
@@ -106,7 +113,8 @@ abstract class Repository implements RepositoryInterface {
      * @param array $columns
      * @return mixed
      */
-    public function find($id, $columns = array('*')) {
+    public function find($id, $columns = array('*'))
+    {
         return $this->model->find($id, $columns);
     }
 
@@ -118,7 +126,8 @@ abstract class Repository implements RepositoryInterface {
      * @param array $columns
      * @return mixed
      */
-    public function findBy($attribute, $value, $columns = array('*')) {
+    public function findBy($attribute, $value, $columns = array('*'))
+    {
         return $this->model->where($attribute, '=', $value)->first($columns);
     }
 
@@ -130,7 +139,8 @@ abstract class Repository implements RepositoryInterface {
      * @param array $columns
      * @return mixed
      */
-    public function findAllBy($attribute, $value, $columns = array('*')) {
+    public function findAllBy($attribute, $value, $columns = array('*'))
+    {
         return $this->model->where($attribute, '=', $value)->select($columns)->get();
     }
 
@@ -142,7 +152,8 @@ abstract class Repository implements RepositoryInterface {
      * @param string $relation
      * @return mixed
      */
-    public function findWhereIn($attribute, array $value, $relation) {
+    public function findWhereIn($attribute, array $value, $relation)
+    {
         return $this->model->whereIn($attribute, $value)->with($relation)->get();
     }
 
@@ -150,13 +161,14 @@ abstract class Repository implements RepositoryInterface {
      * @return \Illuminate\Database\Eloquent\Builder
      * @throws Exception
      */
-    public function makeModel() {
+    public function makeModel()
+    {
         $model = $this->app->make($this->model());
- 
+
         if (!$model instanceof Model)
             throw new Exception("Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
-            //throw new RepositoryException("Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
- 
+        //throw new RepositoryException("Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
+
         return $this->model = $model->newQuery();
     }
 }

@@ -23,4 +23,20 @@ class QuestionController extends ApiController
     {
         $this->questionRepository = $questionRepository;
     }
+
+    public function create()
+    {
+    }
+
+    public function store()
+    {
+    }
+
+    public function update()
+    {
+    }
+
+    public function destroy()
+    {
+    }
 }

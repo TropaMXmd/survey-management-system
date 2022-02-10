@@ -23,4 +23,20 @@ class ExamController extends ApiController
     {
         $this->examRepository = $examRepository;
     }
+
+    public function create()
+    {
+    }
+
+    public function store()
+    {
+    }
+
+    public function update()
+    {
+    }
+
+    public function destroy()
+    {
+    }
 }

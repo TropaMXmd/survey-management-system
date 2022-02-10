@@ -42,7 +42,7 @@ class ApiController extends Controller
      * 
      * @return json response
      */
-    public function errorResponse($code = 400, $data = [], $message = 'Something went wrong! Please try again.')
+    public function errorResponse($message = 'Something went wrong! Please try again.', $code = 400, $data = [])
     {
         $response = [
             'message' => $message,

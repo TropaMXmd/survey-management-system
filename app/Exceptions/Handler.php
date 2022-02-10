@@ -3,10 +3,12 @@
 namespace App\Exceptions;
 
 use Throwable;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
@@ -43,12 +45,15 @@ class Handler extends ExceptionHandler
 
     private function handleApiException($request, Throwable $exception)
     {
+        dd($exception);
         $exception = $this->prepareException($exception);
 
         if ($exception instanceof \App\Exceptions\AuthorizationException) {
             return $this->apiResponse('Unauthorized', 401);
         } else if ($exception instanceof \Illuminate\Auth\AuthenticationException) {
             return $this->apiResponse('Unauthenticated', 401);
+        } else if ($exception instanceof ValidationException) {
+            return $this->apiResponse('Validation error', 422, $exception->errors());
         } else {
             return $this->apiResponse();
         }
