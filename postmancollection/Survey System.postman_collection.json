@@ -1,0 +1,1807 @@
+{
+	"info": {
+		"_postman_id": "dd46089e-41f9-4095-abd3-93ab87626d03",
+		"name": "Survey System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var res = pm.response.json();",
+							"pm.environment.set('token', res.data.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "admin@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Token",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "admin@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.5"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.0.15"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 11 Feb 2022 09:27:49 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Login Successfully.\",\n    \"type\": \"success\",\n    \"code\": 200,\n    \"data\": {\n        \"token\": \"2|lqeZuO3ymugB7mu6vUmoPDHcKBVmvSpdppgN2wyN\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Loggedin User Detail",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|8XAn662GsWwOgyxH7DHsSRWFpiWG7V5atoXhv6pt",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/user",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Store question type",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "MCQ with Single Answer",
+							"type": "text"
+						},
+						{
+							"key": "answer_type",
+							"value": "1",
+							"description": "1:Single, 2:Multiple",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/question-types",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"question-types"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Store question type",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "MCQ with Multiple Answer",
+									"type": "text"
+								},
+								{
+									"key": "answer_type",
+									"value": "2",
+									"description": "1:Single, 2:Multiple",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/question-types",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"question-types"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.5"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.0.15"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 11 Feb 2022 09:32:10 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"New question type added successfully!\",\n    \"type\": \"success\",\n    \"code\": 201,\n    \"data\": {\n        \"question_type_name\": \"MCQ with Multiple Answer\",\n        \"anser_type\": \"Multiple\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Update question type by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "MSCSingle",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/question-types/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"question-types",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update question type by id",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "MSCSingle",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/question-types/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"question-types",
+								"3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.5"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.0.15"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 11 Feb 2022 09:36:40 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Question type updated successfully!\",\n    \"type\": \"success\",\n    \"code\": 200\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete question type",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/question-types/9",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"question-types",
+						"9"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete question type",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/question-types/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"question-types",
+								"3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.5"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.0.15"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 11 Feb 2022 09:38:22 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Question type deleted successfully\",\n    \"type\": \"removed\",\n    \"code\": 200\n}"
+				}
+			]
+		},
+		{
+			"name": "Get question types with or without filter",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/question-types?updated_at=10-02-2022",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"question-types"
+					],
+					"query": [
+						{
+							"key": "updated_at",
+							"value": "10-02-2022"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get question types with or without filter",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/question-types?updated_at=11-02-2022",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"question-types"
+							],
+							"query": [
+								{
+									"key": "updated_at",
+									"value": "11-02-2022"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.5"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.0.15"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 11 Feb 2022 09:35:58 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Fetched all question types.\",\n    \"type\": \"success\",\n    \"code\": 200,\n    \"data\": [\n        {\n            \"question_type_id\": 3,\n            \"question_type_name\": \"MCQ with Single Answer2\",\n            \"anser_type\": \"Multiple\"\n        },\n        {\n            \"question_type_id\": 2,\n            \"question_type_name\": \"MCQ with Single Answer\",\n            \"anser_type\": \"Single\"\n        },\n        {\n            \"question_type_id\": 1,\n            \"question_type_name\": \"MCQ with Multiple Answer\",\n            \"anser_type\": \"Multiple\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Store question",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "What is your favourite movie?",
+							"type": "text"
+						},
+						{
+							"key": "question_type_id",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "options[0]",
+							"value": "test A",
+							"type": "text"
+						},
+						{
+							"key": "options[1]",
+							"value": "test B",
+							"type": "text"
+						},
+						{
+							"key": "options[2]",
+							"value": "test C",
+							"type": "text"
+						},
+						{
+							"key": "options[3]",
+							"value": "test D",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/questions",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"questions"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Store question",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "What is your favourite song?",
+									"type": "text"
+								},
+								{
+									"key": "question_type_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "options[0]",
+									"value": "test A",
+									"type": "text"
+								},
+								{
+									"key": "options[1]",
+									"value": "test B",
+									"type": "text"
+								},
+								{
+									"key": "options[2]",
+									"value": "test C",
+									"type": "text"
+								},
+								{
+									"key": "options[3]",
+									"value": "test D",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/questions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"questions"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.5"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.0.15"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 11 Feb 2022 09:48:54 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"New question added successfully!\",\n    \"type\": \"success\",\n    \"code\": 201,\n    \"data\": {\n        \"question_title\": \"What is your favourite song?\",\n        \"options\": [\n            \"test A\",\n            \"test B\",\n            \"test C\",\n            \"test D\"\n        ],\n        \"question_type\": {\n            \"question_type_id\": 1,\n            \"question_type_name\": \"MCQ with Multiple Answer\",\n            \"anser_type\": \"Multiple\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get all questions",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/questions?updated_at=11-02-2022",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"questions"
+					],
+					"query": [
+						{
+							"key": "updated_at",
+							"value": "11-02-2022"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all questions",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/questions?updated_at=11-02-2022",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"questions"
+							],
+							"query": [
+								{
+									"key": "updated_at",
+									"value": "11-02-2022"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.5"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.0.15"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 11 Feb 2022 09:55:22 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Fetched all questions.\",\n    \"type\": \"success\",\n    \"code\": 200,\n    \"data\": [\n        {\n            \"question_id\": 5,\n            \"question_title\": \"What is your favourite movie?\",\n            \"options\": [\n                \"test A\",\n                \"test B\",\n                \"test C\",\n                \"test D\"\n            ],\n            \"question_type\": {\n                \"question_type_id\": 2,\n                \"question_type_name\": \"MCQ with Single Answer\",\n                \"anser_type\": \"Single\"\n            }\n        },\n        {\n            \"question_id\": 4,\n            \"question_title\": \"What is your favourite series?\",\n            \"options\": [\n                \"test A\",\n                \"test B\",\n                \"test C\",\n                \"test D\"\n            ],\n            \"question_type\": {\n                \"question_type_id\": 1,\n                \"question_type_name\": \"MCQ with Multiple Answer\",\n                \"anser_type\": \"Multiple\"\n            }\n        },\n        {\n            \"question_id\": 3,\n            \"question_title\": \"What is your favourite color?\",\n            \"options\": [\n                \"test A\",\n                \"test B\",\n                \"test C\",\n                \"test D\"\n            ],\n            \"question_type\": {\n                \"question_type_id\": 1,\n                \"question_type_name\": \"MCQ with Multiple Answer\",\n                \"anser_type\": \"Multiple\"\n            }\n        },\n        {\n            \"question_id\": 2,\n            \"question_title\": \"What is your favourite song?\",\n            \"options\": [\n                \"test A\",\n                \"test B\",\n                \"test C\",\n                \"test D\"\n            ],\n            \"question_type\": {\n                \"question_type_id\": 1,\n                \"question_type_name\": \"MCQ with Multiple Answer\",\n                \"anser_type\": \"Multiple\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Update question by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "What is your favourite food?",
+							"type": "text"
+						},
+						{
+							"key": "question_type_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "options[0]",
+							"value": "testa",
+							"type": "text"
+						},
+						{
+							"key": "options[1]",
+							"value": "testb",
+							"type": "text"
+						},
+						{
+							"key": "options[2]",
+							"value": "testc",
+							"type": "text"
+						},
+						{
+							"key": "options[3]",
+							"value": "testd",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/questions/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"questions",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update question by id",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "What is your favourite food?",
+									"type": "text"
+								},
+								{
+									"key": "question_type_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "options[0]",
+									"value": "testa",
+									"type": "text"
+								},
+								{
+									"key": "options[1]",
+									"value": "testb",
+									"type": "text"
+								},
+								{
+									"key": "options[2]",
+									"value": "testc",
+									"type": "text"
+								},
+								{
+									"key": "options[3]",
+									"value": "testd",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/questions/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"questions",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.5"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.0.15"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 11 Feb 2022 09:50:13 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Question updated successfully!\",\n    \"type\": \"success\",\n    \"code\": 200\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete question by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/questions/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"questions",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete question by id",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/questions/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"questions",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.5"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.0.15"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 11 Feb 2022 09:50:57 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Question deleted successfully\",\n    \"type\": \"removed\",\n    \"code\": 200\n}"
+				}
+			]
+		},
+		{
+			"name": "Store exam",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "Final Exam",
+							"type": "text"
+						},
+						{
+							"key": "duration",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "publish_date",
+							"value": "2022-02-11",
+							"type": "text"
+						},
+						{
+							"key": "number_of_questions",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "questions",
+							"value": "1,4,5",
+							"description": "comma separated question ids",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/exams",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"exams"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Store exam",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "First Term Exam",
+									"type": "text"
+								},
+								{
+									"key": "duration",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "publish_date",
+									"value": "2022-02-11",
+									"type": "text"
+								},
+								{
+									"key": "number_of_questions",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "questions",
+									"value": "2,3,4",
+									"description": "comma separated question ids",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/exams",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"exams"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.5"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.0.15"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 11 Feb 2022 09:53:36 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"New exam added successfully!\",\n    \"type\": \"success\",\n    \"code\": 201,\n    \"data\": {\n        \"exam_id\": 1,\n        \"exam_name\": \"First Term Exam\",\n        \"duration\": \"2\",\n        \"published_on\": \"2022-02-11\",\n        \"total_questions\": \"3\",\n        \"created_at\": \"2022-02-11 09:53:36\",\n        \"updated_at\": \"2022-02-11 09:53:36\",\n        \"questions\": [\n            {\n                \"question_title\": \"What is your favourite song?\",\n                \"options\": [\n                    \"test A\",\n                    \"test B\",\n                    \"test C\",\n                    \"test D\"\n                ],\n                \"question_type\": {\n                    \"question_type_id\": 1,\n                    \"question_type_name\": \"MCQ with Multiple Answer\",\n                    \"anser_type\": \"Multiple\"\n                }\n            },\n            {\n                \"question_title\": \"What is your favourite color?\",\n                \"options\": [\n                    \"test A\",\n                    \"test B\",\n                    \"test C\",\n                    \"test D\"\n                ],\n                \"question_type\": {\n                    \"question_type_id\": 1,\n                    \"question_type_name\": \"MCQ with Multiple Answer\",\n                    \"anser_type\": \"Multiple\"\n                }\n            },\n            {\n                \"question_title\": \"What is your favourite series?\",\n                \"options\": [\n                    \"test A\",\n                    \"test B\",\n                    \"test C\",\n                    \"test D\"\n                ],\n                \"question_type\": {\n                    \"question_type_id\": 1,\n                    \"question_type_name\": \"MCQ with Multiple Answer\",\n                    \"anser_type\": \"Multiple\"\n                }\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Update exam by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "Final Term exam",
+							"type": "text"
+						},
+						{
+							"key": "questions",
+							"value": "4,5",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/exams/2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"exams",
+						"2"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update exam by id",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Final Term exam",
+									"type": "text"
+								},
+								{
+									"key": "questions",
+									"value": "4,5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/exams/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"exams",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.5"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.0.15"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 11 Feb 2022 09:59:50 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Exam updated successfully!\",\n    \"type\": \"success\",\n    \"code\": 200\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete exam by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/exams/2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"exams",
+						"2"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete exam by id",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/exams/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"exams",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.5"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.0.15"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 11 Feb 2022 10:01:54 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Exam deleted successfully\",\n    \"type\": \"removed\",\n    \"code\": 200\n}"
+				}
+			]
+		},
+		{
+			"name": "Get all exams",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/exams?updated_at=2022-02-11",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"exams"
+					],
+					"query": [
+						{
+							"key": "updated_at",
+							"value": "2022-02-11"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all exams",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/exams?updated_at=2022-02-11",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"exams"
+							],
+							"query": [
+								{
+									"key": "updated_at",
+									"value": "2022-02-11"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.5"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.0.15"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 11 Feb 2022 10:00:56 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Fetched all exams.\",\n    \"type\": \"success\",\n    \"code\": 200,\n    \"data\": [\n        {\n            \"exam_id\": 2,\n            \"exam_name\": \"Final Term exam\",\n            \"duration\": 2,\n            \"published_on\": \"2022-02-11 00:00:00\",\n            \"total_questions\": 3,\n            \"created_at\": \"2022-02-11 09:56:09\",\n            \"updated_at\": \"2022-02-11 09:59:50\",\n            \"questions\": [\n                {\n                    \"question_id\": 4,\n                    \"question_title\": \"What is your favourite series?\",\n                    \"options\": [\n                        \"test A\",\n                        \"test B\",\n                        \"test C\",\n                        \"test D\"\n                    ],\n                    \"question_type\": {\n                        \"question_type_id\": 1,\n                        \"question_type_name\": \"MCQ with Multiple Answer\",\n                        \"anser_type\": \"Multiple\"\n                    }\n                },\n                {\n                    \"question_id\": 5,\n                    \"question_title\": \"What is your favourite movie?\",\n                    \"options\": [\n                        \"test A\",\n                        \"test B\",\n                        \"test C\",\n                        \"test D\"\n                    ],\n                    \"question_type\": {\n                        \"question_type_id\": 2,\n                        \"question_type_name\": \"MCQ with Single Answer\",\n                        \"anser_type\": \"Single\"\n                    }\n                }\n            ]\n        },\n        {\n            \"exam_id\": 1,\n            \"exam_name\": \"First Term Exam\",\n            \"duration\": 2,\n            \"published_on\": \"2022-02-11 00:00:00\",\n            \"total_questions\": 3,\n            \"created_at\": \"2022-02-11 09:53:36\",\n            \"updated_at\": \"2022-02-11 09:53:36\",\n            \"questions\": [\n                {\n                    \"question_id\": 2,\n                    \"question_title\": \"What is your favourite song?\",\n                    \"options\": [\n                        \"test A\",\n                        \"test B\",\n                        \"test C\",\n                        \"test D\"\n                    ],\n                    \"question_type\": {\n                        \"question_type_id\": 1,\n                        \"question_type_name\": \"MCQ with Multiple Answer\",\n                        \"anser_type\": \"Multiple\"\n                    }\n                },\n                {\n                    \"question_id\": 3,\n                    \"question_title\": \"What is your favourite color?\",\n                    \"options\": [\n                        \"test A\",\n                        \"test B\",\n                        \"test C\",\n                        \"test D\"\n                    ],\n                    \"question_type\": {\n                        \"question_type_id\": 1,\n                        \"question_type_name\": \"MCQ with Multiple Answer\",\n                        \"anser_type\": \"Multiple\"\n                    }\n                },\n                {\n                    \"question_id\": 4,\n                    \"question_title\": \"What is your favourite series?\",\n                    \"options\": [\n                        \"test A\",\n                        \"test B\",\n                        \"test C\",\n                        \"test D\"\n                    ],\n                    \"question_type\": {\n                        \"question_type_id\": 1,\n                        \"question_type_name\": \"MCQ with Multiple Answer\",\n                        \"anser_type\": \"Multiple\"\n                    }\n                }\n            ]\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Get a single exam by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/exams/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"exams",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get a single exam by Id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/exams/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"exams",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.5"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.0.15"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 11 Feb 2022 10:01:26 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Fetched exam details.\",\n    \"type\": \"success\",\n    \"code\": 200,\n    \"data\": {\n        \"exam_id\": 1,\n        \"exam_name\": \"First Term Exam\",\n        \"duration\": 2,\n        \"published_on\": \"2022-02-11 00:00:00\",\n        \"total_questions\": 3,\n        \"created_at\": \"2022-02-11 09:53:36\",\n        \"updated_at\": \"2022-02-11 09:53:36\",\n        \"questions\": [\n            {\n                \"question_id\": 2,\n                \"question_title\": \"What is your favourite song?\",\n                \"options\": [\n                    \"test A\",\n                    \"test B\",\n                    \"test C\",\n                    \"test D\"\n                ],\n                \"question_type\": {\n                    \"question_type_id\": 1,\n                    \"question_type_name\": \"MCQ with Multiple Answer\",\n                    \"anser_type\": \"Multiple\"\n                }\n            },\n            {\n                \"question_id\": 3,\n                \"question_title\": \"What is your favourite color?\",\n                \"options\": [\n                    \"test A\",\n                    \"test B\",\n                    \"test C\",\n                    \"test D\"\n                ],\n                \"question_type\": {\n                    \"question_type_id\": 1,\n                    \"question_type_name\": \"MCQ with Multiple Answer\",\n                    \"anser_type\": \"Multiple\"\n                }\n            },\n            {\n                \"question_id\": 4,\n                \"question_title\": \"What is your favourite series?\",\n                \"options\": [\n                    \"test A\",\n                    \"test B\",\n                    \"test C\",\n                    \"test D\"\n                ],\n                \"question_type\": {\n                    \"question_type_id\": 1,\n                    \"question_type_name\": \"MCQ with Multiple Answer\",\n                    \"anser_type\": \"Multiple\"\n                }\n            }\n        ]\n    }\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
