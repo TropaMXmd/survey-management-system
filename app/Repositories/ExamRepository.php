@@ -4,6 +4,9 @@ namespace App\Repositories;
 
 use Carbon\Carbon;
 use App\Repositories\Repository;
+use App\Notifications\ExamPublished;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Notification;
 
 
 class ExamRepository extends Repository
@@ -36,6 +39,11 @@ class ExamRepository extends Repository
         $quesIds = explode(",", $request->get('questions'));
         $exam = $this->model->create($request->all());
         $exam->questions()->attach($quesIds);
+        $emailIds = config('survey_system.EMAIL_IDS_FOR_NOTIFICATION');
+        foreach ($emailIds as $email) {
+            Notification::route('mail', $email)
+                ->notify(new ExamPublished($exam));
+        }
         return $exam;
     }
 

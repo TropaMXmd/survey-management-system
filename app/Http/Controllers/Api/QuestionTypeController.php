@@ -35,7 +35,7 @@ class QuestionTypeController extends ApiController
 
             return $this->errorResponse('No data found.', 400);
         } catch (\Exception $e) {
-            app('log')->error('Content: ' . $e->getMessage(), $e->getTrace());
+            app('log')->error('Question-type: ' . $e->getMessage(), $e->getTrace());
             return $this->errorResponse();
         }
     }
@@ -49,7 +49,7 @@ class QuestionTypeController extends ApiController
 
             return $this->errorResponse('Not Created successfully', 400);
         } catch (\Exception $e) {
-            app('log')->error('Pocket: ' . $e->getMessage(), $e->getTrace());
+            app('log')->error('Question-type: ' . $e->getMessage(), $e->getTrace());
             return $this->errorResponse();
         }
     }
@@ -63,7 +63,7 @@ class QuestionTypeController extends ApiController
 
             return $this->errorResponse('Not updated successfully', 400);
         } catch (\Exception $e) {
-            app('log')->error('Content: ' . $e->getMessage(), $e->getTrace());
+            app('log')->error('Question-type: ' . $e->getMessage(), $e->getTrace());
             return $this->errorResponse();
         }
     }
@@ -77,7 +77,7 @@ class QuestionTypeController extends ApiController
 
             return $this->errorResponse(400, $result);
         } catch (\Exception $e) {
-            app('log')->error('Content: ' . $e->getMessage(), $e->getTrace());
+            app('log')->error('Question-type: ' . $e->getMessage(), $e->getTrace());
             return $this->errorResponse();
         }
     }

@@ -35,7 +35,7 @@ class ExamController extends ApiController
 
             return $this->errorResponse('No data found.', 400);
         } catch (\Exception $e) {
-            app('log')->error('Content: ' . $e->getMessage(), $e->getTrace());
+            app('log')->error('Exam: ' . $e->getMessage(), $e->getTrace());
             return $this->errorResponse();
         }
     }
@@ -49,7 +49,7 @@ class ExamController extends ApiController
 
             return $this->errorResponse('No data found.', 400);
         } catch (\Exception $e) {
-            app('log')->error('Content: ' . $e->getMessage(), $e->getTrace());
+            app('log')->error('Exam: ' . $e->getMessage(), $e->getTrace());
             return $this->errorResponse();
         }
     }
@@ -64,7 +64,7 @@ class ExamController extends ApiController
 
             return $this->errorResponse('Not Created successfully', 400);
         } catch (\Exception $e) {
-            app('log')->error('Pocket: ' . $e->getMessage(), $e->getTrace());
+            app('log')->error('Exam: ' . $e->getMessage(), $e->getTrace());
             return $this->errorResponse();
         }
     }
@@ -78,21 +78,21 @@ class ExamController extends ApiController
 
             return $this->errorResponse('Not updated successfully', 400);
         } catch (\Exception $e) {
-            app('log')->error('Content: ' . $e->getMessage(), $e->getTrace());
+            app('log')->error('Exam: ' . $e->getMessage(), $e->getTrace());
             return $this->errorResponse();
         }
     }
 
-    public function destroy($typeId)
+    public function destroy($examId)
     {
         try {
-            $result = $this->examRepository->deleteWithPivot($typeId);
+            $result = $this->examRepository->deleteWithPivot($examId);
             if ($result)
                 return $this->respond('Exam deleted successfully', 'removed');
 
             return $this->errorResponse(400, $result);
         } catch (\Exception $e) {
-            app('log')->error('Content: ' . $e->getMessage(), $e->getTrace());
+            app('log')->error('Exam: ' . $e->getMessage(), $e->getTrace());
             return $this->errorResponse();
         }
     }
