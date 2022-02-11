@@ -16,6 +16,7 @@ class QuestionTypeResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'question_type_id' => $this->id,
             'question_type_name' => $this->name,
             'anser_type' => $this->answer_type == 1 ? "Single" : "Multiple"
         ];

@@ -3,6 +3,7 @@
 Run the commands
 - git clone https://github.com/TropaMXmd/survey-management-system.git
 - cd survey-management-system
+- composer install
 - cp .env.example .env
 - docker-compose build
 - docker-compose up -d

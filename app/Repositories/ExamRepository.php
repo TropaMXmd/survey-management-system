@@ -52,7 +52,10 @@ class ExamRepository extends Repository
         $quesIds = $request->has('questions') ? explode(",", $request->get('questions')) : [];
         $exam = $this->model->find($examId);
         $exam->update($request->all());
-        if (count($quesIds) > 0) $exam->questions()->attach($quesIds);
+        if (count($quesIds) > 0) {
+            $exam->questions()->detach();
+            $exam->questions()->attach($quesIds);
+        }
         return $exam;
     }
 

@@ -45,7 +45,6 @@ class Handler extends ExceptionHandler
 
     private function handleApiException($request, Throwable $exception)
     {
-        dd($exception);
         $exception = $this->prepareException($exception);
 
         if ($exception instanceof \App\Exceptions\AuthorizationException) {
