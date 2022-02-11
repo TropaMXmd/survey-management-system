@@ -40,6 +40,20 @@ class ExamController extends ApiController
         }
     }
 
+    public function show($examId)
+    {
+        try {
+            $result = $this->examRepository->find($examId);
+            if (!empty($result))
+                return $this->respond('Fetched exam details.', 'success', 200, new ExamResource($result));
+
+            return $this->errorResponse('No data found.', 400);
+        } catch (\Exception $e) {
+            app('log')->error('Content: ' . $e->getMessage(), $e->getTrace());
+            return $this->errorResponse();
+        }
+    }
+
     public function store(ExamRequest $examRequest)
     {
         try {

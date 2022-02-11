@@ -115,7 +115,7 @@ abstract class Repository implements RepositoryInterface
      */
     public function find($id, $columns = array('*'))
     {
-        return $this->model->find($id, $columns);
+        return $this->model->select($columns)->find($id);
     }
 
     /**

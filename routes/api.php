@@ -23,14 +23,16 @@ Route::group(["middleware" => ['auth:sanctum', 'admin']], function () {
         return $request->user();
     });
 
-    //Route::post('/question-types', 'QuestionTypeController@store');
-    //Route::resource("question-types", 'QuestionTypeController');
-
     Route::resources([
         "question-types" => 'QuestionTypeController',
         "questions" => 'QuestionController',
-        "exams" => 'ExamController',
     ]);
 
-    //Route::resource("traning_infos", API\TraningInfoController::class);
+    Route::post('/exams', 'ExamController@store');
+    Route::get('/exams', 'ExamController@index');
+    Route::patch('/exams/{examId}', 'ExamController@update');
+    Route::delete('/exams/{examId}', 'ExamController@destroy');
 });
+
+//---------------For general user-------------------
+Route::get('/exams/{examId}', 'ExamController@show');
